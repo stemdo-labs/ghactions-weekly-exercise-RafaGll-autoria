@@ -18,7 +18,7 @@ runs:
       id: generar-tag
       run: echo "tag=${{ env.user }}/${{ env.image }}:${{ env.version }}" >> $GITHUB_OUTPUT
       env:
-        user: ${{ vars.DOCKER_USERNAME }}
+        user: ${{ variables.DOCKER_USERNAME }}
         image: ${{ inputs.image_name }}
         version: ${{ inputs.version }}
 
