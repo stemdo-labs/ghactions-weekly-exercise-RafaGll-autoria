@@ -27,9 +27,9 @@ jobs:
       - name: build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./.github
           push: true
           tags: ${{ steps.tag.outputs.tag }}
-          dockerfile: ./Dockerfile2
+          dockerfile: ./.github/Dockerfile
 
       - run: docker ps -a
