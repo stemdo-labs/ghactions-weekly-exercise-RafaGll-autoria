@@ -1,4 +1,17 @@
 name: cd
-on: workflow_dispatch
+on: push
 
+jobs:
+  ejecutar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: bajar imagen
+        run: docker pull rafagll/sample-angular-app:latest
+      - name: ejecutar contenedor
+        run: docker run -dit -p 8080:80 --name angular-app rafagll/sample-angular-app:latest
+      - name: docker ps
+        run: docker ps
+
+      - name: docker stop 
+        run: docker stop angular-app
 
