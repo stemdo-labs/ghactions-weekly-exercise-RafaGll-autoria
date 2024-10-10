@@ -1,5 +1,5 @@
 name: ci
-on: workflow_call
+on: workflow_dispatch
 
 jobs:
   build:
@@ -27,8 +27,9 @@ jobs:
       - name: build and push
         uses: docker/build-push-action@v6
         with:
-          context: .
+         context: .
           push: true
           tags: ${{ steps.tag.outputs.tag }}
+          dockerfile: ./Dockerfile2
 
       - run: docker ps -a

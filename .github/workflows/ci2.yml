@@ -1,5 +1,5 @@
 name: ci
-on: push
+on: workflow_dispatch
 
 jobs:
   container-test:
@@ -50,8 +50,9 @@ jobs:
 
       - uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./.github/
           push: true
           tags: ${{ steps.tag.outputs.tag }}
+          dockerfile: ./.github/Dockerfile
 
       - run: docker ps -a
