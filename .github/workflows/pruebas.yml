@@ -1,0 +1,15 @@
+name: ci
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/chechout@v4
+      - id: foo
+        uses: ./.github/actions/custonAction
+        with:
+          image_name: "hola"
+          version: 1.0.0
+      - run: echo ${{ steps.foo.outputs.tag }}
+
