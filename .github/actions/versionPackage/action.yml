@@ -13,6 +13,7 @@ runs:
         echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
         cat ./package.json >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
+      shell: bash
     - id: version
       run: echo "version=${{ fromJson(env.PACKAGE_JSON).version }}" >> $GITHUB_OUTPUT
       shell: bash
