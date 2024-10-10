@@ -2,5 +2,5 @@ name: 'hola'
 runs:
   using: "composite"
   steps:
-    - run: echo ${{ process.env.USERNAME }}
+    - run: echo ${{ env.USERNAME }}
       shell: bash
