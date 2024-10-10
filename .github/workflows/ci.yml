@@ -32,6 +32,6 @@ jobs:
           push: true
           tags: ${{ steps.tag.outputs.tag }}
 
-      - run: ls -la
+      - run: ls -la src
 
 
