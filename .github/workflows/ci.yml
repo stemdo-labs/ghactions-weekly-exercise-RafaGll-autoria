@@ -24,10 +24,6 @@ jobs:
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - run: ls -la src
-      - run: ls -la
-      - run: ls -la nginx
-
       - name: build and push
         uses: docker/build-push-action@v6
         with:
@@ -35,8 +31,5 @@ jobs:
           push: true
           tags: ${{ steps.tag.outputs.tag }}
 
-      - run: ls -la src
-      - run: ls -la 
-      - run: ls -la nginx
-
-
+      - run: cd
+      - run: ls -la
