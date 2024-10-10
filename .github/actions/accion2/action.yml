@@ -1,0 +1,6 @@
+name: 'hola'
+runs:
+  using: "composite"
+  steps:
+    - run: echo ${{ vars.DOCKER_USERNAME }}
+      shell: bash

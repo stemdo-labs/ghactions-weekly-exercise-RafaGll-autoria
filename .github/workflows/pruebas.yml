@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: ./.github/actions/accion2
       - id: foo
         uses: ./.github/actions/customAction
         with:
