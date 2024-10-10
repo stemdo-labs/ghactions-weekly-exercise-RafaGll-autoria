@@ -8,13 +8,12 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Guardar version
     - name: Leer json
       run: |
         echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
         cat ./package.json >> $GITHUB_ENV
         echo 'EOF' >> $GITHUB_ENV
-      shell: bash
-    - name: Guardar version
-      id: version
+    - id: version
       run: echo "version=${{ fromJson(env.PACKAGE_JSON).version }}" >> $GITHUB_OUTPUT
       shell: bash
