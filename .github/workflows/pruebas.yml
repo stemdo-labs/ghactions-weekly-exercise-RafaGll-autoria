@@ -6,13 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/accion2
-        env: 
-          USERNAME: ${{ vars.DOCKER_USERNAME }}
       - id: foo
         uses: ./.github/actions/customAction
         with:
           image_name: "hola"
           version: 1.0.0
       - run: echo ${{ steps.foo.outputs.tag }}
+        env: 
+          USERNAME: ${{ vars.DOCKER_USERNAME }}
 
