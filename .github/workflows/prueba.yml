@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node
+      volumes:
+        - ${{ github.workspace }}:/
     steps:
       - run: ls -la
       - run: cd /
