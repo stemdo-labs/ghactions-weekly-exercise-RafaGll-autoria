@@ -41,5 +41,6 @@ jobs:
           context: ./.github/
           push: true
           tags: ${{ steps.tag.outputs.tag }}
+          dockerfile: ./.github/Dockerfile
 
       - run: docker ps -a
