@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: bajar imagen
-        run: docker pull rafagll/sample-angular-app:latest
+        run: docker pull rafagll/sample-angular-app:0.1.2
       - name: ejecutar contenedor
         run: docker run -dit -p 8080:80 --name angular-app rafagll/sample-angular-app:latest
       - name: docker ps
