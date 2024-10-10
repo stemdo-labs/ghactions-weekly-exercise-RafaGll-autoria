@@ -1,18 +1,20 @@
 name: cd
-on: workflow_dispatch
+on: push
 
 jobs:
   ejecutar:
     runs-on: ubuntu-latest
     steps:
       - name: bajar imagen
-        run: docker pull rafagll/sample-angular-app:0.1.2
+        run: docker pull rafagll/sample-angular-app:0.2.0
       - name: ejecutar contenedor
-        run: docker run -d -it -p 80:80 --name angular-app rafagll/sample-angular-app:0.1.2
+        run: docker run -d -it -p 8080:8080 --name angular-app rafagll/sample-angular-app:0.2.0
       - name: docker ps
         run: docker ps
-      - run: curl localhost
-      - run: ls
+      - run: curl localhost:8080 > curl.txt
+
+      - run: cat curl.txt
+
 
       - name: docker stop 
         run: docker stop angular-app
