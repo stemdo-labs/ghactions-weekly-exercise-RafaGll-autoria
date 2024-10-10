@@ -2,16 +2,26 @@ name: ci
 on: push
 
 jobs:
-  build:
+  version:
     runs-on: ubuntu-latest
     steps:
+    
+  build:
+    runs-on: ubuntu-latest
+    needs: version
+    steps:
       - uses: actions/checkout@v4
-      - id: foo
+      - name: 'Obtener versión'
+        id: version
+        uses: ./.github/actions/versionPackage
+
+      - name: Obtener tag
+        id: tag
         uses: ./.github/actions/customAction
         env: 
           USERNAME: ${{ vars.DOCKER_USERNAME }}
         with:
           image_name: "hola"
-          version: 1.0.0
-      - run: echo ${{ steps.foo.outputs.tag }}
+          version: ${{ steps.version.outputs.version }}
+      - run: echo ${{ steps.tag.outputs.tag }}
 

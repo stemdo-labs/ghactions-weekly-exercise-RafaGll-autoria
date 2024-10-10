@@ -1,0 +1,21 @@
+name: 'version'
+description: 'Obtener versión del package.json'
+outputs:
+  version:
+    description: 'versión actual del package.json'
+    value: ${{ steps.version.outputs.version }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Leer json
+      run: |
+        echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
+        cat ./package.json >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
+      shell: bash
+    - name: Guardar version
+      id: version
+      run: echo "version=${{ fromJson(env.PACKAGE_JSON).version }}" >> $GITHUB_OUTPUT
+      shell: bash
+
