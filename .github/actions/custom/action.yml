@@ -1,11 +1,8 @@
 name: 'Crear tag'
 description: 'Action para crear el tag personalizado para la imágen'
-inputs:
-  image_name:
-    description: 'Nombre de la imagen'
-    required: true
-  version:
-    description: 'Versión de la imagen'
+inputs: 
+  user:
+    description: 'nombre de usuario en docker'
     required: true
 outputs:
   tag:
@@ -15,11 +12,12 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: "Obtener la versión"
+      run: |
+        echo "version=$(jq -r '.version' ./package.json)" >> $GITHUB_ENV
+        echo "image=$(jq -r '.name' ./package.json)" >> $GITHUB_ENV
+      shell: bash
     - name: Crear el tag
       id: generar-tag
-      run: echo "tag=${{ env.user }}/${{ env.image }}:${{ env.version }}" >> $GITHUB_OUTPUT
-      env:
-        user: ${{ env.USERNAME }}
-        image: ${{ inputs.image_name }}
-        version: ${{ inputs.version }}
+      run: echo "tag=${{ inputs.user }}/${{ env.image }}:${{ env.version }}" >> $GITHUB_OUTPUT
       shell: bash
