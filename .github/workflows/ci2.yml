@@ -21,6 +21,7 @@ jobs:
           path: ./dist/sample-angular-app/browser
   build:
     runs-on: ubuntu-latest
+    needs: container-test
     steps:
       - uses: actions/checkout@v4
 
