@@ -4,8 +4,8 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
-    # container:
-    #  image: node:latest
+    container:
+    image: node:19
 
     steps:
       - uses: actions/checkout@v4
