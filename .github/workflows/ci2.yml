@@ -1,5 +1,5 @@
 name: ci
-on: workdflow_dispatch
+on: push
 
 jobs:
   build:

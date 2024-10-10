@@ -1,10 +1,14 @@
-on: push
+on: workflow_dispatch
 
 jobs:
   container-test:
     runs-on: ubuntu-latest
     container:
       image: node:latest
+    steps:
+      - name: Coger repo
+        uses: action/checkout@v4
+
 
     steps:
       - run: node --version
