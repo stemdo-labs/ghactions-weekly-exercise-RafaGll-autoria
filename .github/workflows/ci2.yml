@@ -8,6 +8,11 @@ jobs:
       image: node:latest
     steps:
       - uses: actions/checkout@v4
+      - name: cache
+        uses: actions/cache@v4
+        with:
+          path: ./node_modules
+          key: node-modules-${{ hashFiles('./package-lock.json') }}
       - run: npm install
       - run: npm run build
       - uses: actions/upload-artifact@v4
