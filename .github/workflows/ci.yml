@@ -27,7 +27,7 @@ jobs:
       - name: build and push
         uses: docker/build-push-action@v6
         with:
-         context: .
+          context: .
           push: true
           tags: ${{ steps.tag.outputs.tag }}
           dockerfile: ./Dockerfile2
