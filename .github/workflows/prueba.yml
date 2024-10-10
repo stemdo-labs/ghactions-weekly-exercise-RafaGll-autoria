@@ -1,0 +1,11 @@
+on: push
+
+jobs:
+  container-test:
+    runs-on: ubuntu-latest
+    container:
+      image: node
+    steps:
+      - run: ls -la
+      - run: cd /
+      - run: ls -la
