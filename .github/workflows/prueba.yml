@@ -4,10 +4,10 @@ jobs:
   container-test:
     runs-on: ubuntu-latest
     container:
-      image: node
-      volumes:
-        - ${{ github.workspace }}:/
+      image: node:latest
+
     steps:
+      - run: node --version
       - run: ls -la
       - run: cd /
       - run: ls -la
