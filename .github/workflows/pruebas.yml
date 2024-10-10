@@ -7,6 +7,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/accion2
+        env: 
+          USERNAME: ${{ vars.DOCKER_USERNAME }}
       - id: foo
         uses: ./.github/actions/customAction
         with:
