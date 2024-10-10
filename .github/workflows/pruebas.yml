@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: foo
-        uses: ./.github/actions/custonAction
+        uses: ./.github/actions/customAction
         with:
           image_name: "hola"
           version: 1.0.0
