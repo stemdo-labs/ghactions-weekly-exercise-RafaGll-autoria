@@ -22,4 +22,3 @@ runs:
         image: ${{ inputs.image_name }}
         version: ${{ inputs.version }}
       shell: bash
-
