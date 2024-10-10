@@ -21,4 +21,5 @@ runs:
         user: ${{ variables.DOCKER_USERNAME }}
         image: ${{ inputs.image_name }}
         version: ${{ inputs.version }}
+      shell: bash
 
