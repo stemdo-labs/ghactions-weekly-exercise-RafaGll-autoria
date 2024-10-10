@@ -8,7 +8,6 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: Guardar version
     - name: Leer json
       run: |
         echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
