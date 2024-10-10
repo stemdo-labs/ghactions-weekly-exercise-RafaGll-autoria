@@ -10,5 +10,5 @@ RUN npm run build
 FROM nginx
 COPY --from=build /app/dist/sample-angular-app/browser /usr/share/nginx/html
 #Changing default config 
-COPY ../nginx/default.conf  /etc/nginx/conf.d/default.conf
+COPY ./nginx/default.conf  /etc/nginx/conf.d/default.conf
 CMD ["nginx", "-g", "daemon off;"]
