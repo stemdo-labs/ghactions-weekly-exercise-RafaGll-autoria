@@ -9,5 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: prueba
-        run: echo ${{ env.hola }}
+        id: prueba
+        run: echo "prueba=${{ env.hola }}${{env.adios}}" >> $GITHUB_OUTPUT
+      - name: print
+        run: echo ${{ steps.prueba.outputs.prueba }}
 
