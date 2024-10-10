@@ -7,8 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: 'Obtener versión'
-        id: version
-        uses: ./.github/actions/versionPackage
+        run: echo "version=$(jq -r '.version')" >> $GITHUB_ENV
 
       - name: Obtener tag
         id: tag
@@ -17,6 +16,6 @@ jobs:
           USERNAME: ${{ vars.DOCKER_USERNAME }}
         with:
           image_name: "hola"
-          version: ${{ steps.version.outputs.version }}
+          version: ${{ env.version }}
       - run: echo ${{ steps.tag.outputs.tag }}
 

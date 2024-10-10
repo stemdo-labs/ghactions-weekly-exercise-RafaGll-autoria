@@ -11,6 +11,7 @@ outputs:
   tag:
     description: 'tag final de la imagen'
     value: ${{ steps.generar-tag.outputs.tag }}
+
 runs:
   using: "composite"
   steps:
