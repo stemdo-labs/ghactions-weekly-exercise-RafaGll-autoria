@@ -2,17 +2,16 @@ name: ci
 on: workdflow_dispatch
 
 jobs:
-  container-test:
-    runs-on: ubuntu-latest
-    container:
-      image: node
-      env:
-        NODE_ENV: development
-      volumes: 
   build:
     runs-on: ubuntu-latest
+    container:
+      image: node:latest
+
     steps:
       - uses: actions/checkout@v4
+      - run: npm install
+      - run: ls -la
+
       - name: 'Obtener versión'
         run: echo "version=$(jq -r '.version' ./package.json)" >> $GITHUB_ENV
 
@@ -32,11 +31,5 @@ jobs:
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: build and push
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.tag.outputs.tag }}
 
       - run: docker ps -a
