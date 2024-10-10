@@ -11,7 +11,7 @@ jobs:
         run: docker run -d -it -p 8080:80 --name angular-app rafagll/sample-angular-app:0.1.2
       - name: docker ps
         run: docker ps
-      - run: curl localhost
+      - run: curl localhost:8080
       - run: ls
 
       - name: docker stop 
