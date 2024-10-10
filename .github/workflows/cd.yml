@@ -1,5 +1,5 @@
 name: cd
-on: push
+on: workflow_dispatch
 
 jobs:
   ejecutar:
