@@ -3,7 +3,6 @@ on: push
 
 jobs:
   ci:
-    needs: tag
     uses: ./.github/workflows/ci.yml
     secrets: inherit
   prueba:
