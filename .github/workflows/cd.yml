@@ -2,6 +2,9 @@ name: cd
 on: 
   workflow_call:
     inputs: 
+      entorno:
+        required: true
+        type: string
       tag:
         required: true
         type: string

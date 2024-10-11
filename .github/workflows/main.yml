@@ -1,13 +1,36 @@
 name: "trigger ci/cd"
-on: push
+on: 
+  push:
+    branches:
+      - main
+      - development
+      - pruebas
+
 
 jobs:
+  entorno:
+    runs-on: ubuntu-latest
+    outputs:
+      entorno: ${{ steps.obtener.outputs.entorno }}
+    steps:
+      - id: obtener
+        run: |
+          if [ ${{ github.ref-name }} == 'main' ]; then
+            echo "entorno=production" >> $GITHUB_OUTPUT
+          else
+            echo "entorno=UAT" >> $GITHUB_OUTPUT
+          fi
   ci:
+    needs: entorno
+    environment: production
     uses: ./.github/workflows/ci.yml
+    with:
+      entorno: ${{ needs.entorno.outputs.entorno }}
     secrets: inherit
   cd:
     needs: ci
     uses: ./.github/workflows/cd.yml
     with: 
       tag: ${{ needs.ci.outputs.tag }}
+      entorno: ${{ needs.entorno.outputs.entorno }}
 

@@ -1,22 +1,38 @@
 name: ci
 on:
   workflow_call:
+    inputs:
+      entorno:
+        required: true
+        type: string
     outputs:
       tag:
         value: ${{ jobs.build.outputs.tag }}
 
 jobs:
-  test:
+  test: 
+    if: true
+  #if: ${{ inputs.entorno == 'production' }}
     runs-on: ubuntu-latest
+    #environment: produccion
     container:
       image: node:latest
     steps:
+      - run: echo ${{ vars.prueba }}
+      - run: echo "SIMULACIÓN DE TESTS"
       - uses: actions/checkout@v4
-      - run: npm install
-      - run: npm run test
+      - run: echo npm install
+      - run: echo instalando...
+      - run: sleep 2
+      - run: echo npm run test
+      - run: echo realizando tests...
+      - run: sleep 2
+      - run: EXITO
   build:
-    if: false
     runs-on: ubuntu-latest
+    environment: ${{ inputs.entorno }}
+    if: ${{ always() }}
+    needs: test
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
     steps:
