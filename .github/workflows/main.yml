@@ -1,0 +1,11 @@
+name: "trigger ci/cd"
+on: workflow_dispatch
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+  cd:
+    uses: ./.github/workflows/cd.yml
+
+
+
