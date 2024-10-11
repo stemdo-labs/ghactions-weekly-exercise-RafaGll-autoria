@@ -1,5 +1,10 @@
 name: ci
-on: workflow_call
+on:
+  workflow_call:
+    outputs:
+      tag:
+        value: ${{ steps.tag.outputs.tag }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
