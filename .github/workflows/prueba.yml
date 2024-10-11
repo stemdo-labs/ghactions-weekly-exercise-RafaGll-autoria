@@ -1,17 +1,12 @@
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: environment
 
 jobs:
   container-test:
     runs-on: ubuntu-latest
-    container:
-      image: node:latest
     steps:
-      - name: Coger repo
-        uses: action/checkout@v4
-
-
-    steps:
-      - run: node --version
-      - run: ls -la
-      - run: cd /
-      - run: ls -la
+      - run: echo ${{ vars.prueba }}
