@@ -6,7 +6,16 @@ on:
         value: ${{ jobs.build.outputs.tag }}
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: node:latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install
+      - run: npm run test
   build:
+    if: false
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
