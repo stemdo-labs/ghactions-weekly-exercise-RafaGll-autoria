@@ -2,10 +2,22 @@ name: "trigger ci/cd"
 on: push
 
 jobs:
+  tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - uses: ./.github/actions/getTag
+        with: 
+          user: ${{ vars.DOCKER_USERNAME }}
+        id: tag
   ci:
+    needs: tag
     uses: ./.github/workflows/ci.yml
     secrets: inherit
+    with: ${{ needs.tag.outputs.tag }}
   cd:
     needs: ci
     uses: ./.github/workflows/cd.yml
+    #with: ${{ needs.tag.outputs.tag }}
 

@@ -1,5 +1,10 @@
 name: ci
-on: workflow_call
+on: 
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        required: true
 
 jobs:
   build:
@@ -9,11 +14,11 @@ jobs:
       - name: 'Obtener versión'
         run: echo "version=$(jq -r '.version' ./package.json)" >> $GITHUB_ENV
 
-      - name: Obtener tag
-        id: tag
-        uses: ./.github/actions/getTag
-        with:
-          user: ${{ vars.DOCKER_USERNAME }}
+        #- name: Obtener tag
+        #id: tag
+        #uses: ./.github/actions/getTag
+        #with:
+        #user: ${{ vars.DOCKER_USERNAME }}
 
       - name: login
         uses: docker/login-action@v3
@@ -26,5 +31,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.tag.outputs.tag }}
+          tags: ${{ github.event.inputs.tag }}
+
 
