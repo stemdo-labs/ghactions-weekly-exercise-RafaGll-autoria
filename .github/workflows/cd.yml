@@ -1,5 +1,11 @@
 name: cd
-on: workflow_call
+on: 
+  workflow_call:
+    inputs: 
+      tag:
+        required: true
+        type: string
+
 
 jobs:
   ejecutar:
@@ -8,7 +14,7 @@ jobs:
       - name: bajar imagen
         run: docker pull rafagll/sample-angular-app:0.2.0
       - name: ejecutar contenedor
-        run: docker run -d -it -p 8080:8080 --name angular-app rafagll/sample-angular-app:0.2.0
+        run: docker run -d -it -p 8080:8080 --name angular-app ${{ inputs.tag }}
       - name: docker ps
         run: docker ps
       - run: curl localhost:8080 > curl.txt

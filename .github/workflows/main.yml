@@ -5,14 +5,9 @@ jobs:
   ci:
     uses: ./.github/workflows/ci.yml
     secrets: inherit
-  prueba:
+  cd:
     needs: ci
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ${{ needs.ci.outputs.tag }}
-
-        #cd:
-        #needs: ci
-        #uses: ./.github/workflows/cd.yml
-    #with: ${{ needs.tag.outputs.tag }}
+    uses: ./.github/workflows/cd.yml
+    with: 
+      tag: ${{ needs.ci.outputs.tag }}
 
