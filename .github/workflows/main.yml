@@ -22,7 +22,6 @@ jobs:
           fi
   ci:
     needs: entorno
-    environment: production
     uses: ./.github/workflows/ci.yml
     with:
       entorno: ${{ needs.entorno.outputs.entorno }}
