@@ -1,24 +1,20 @@
 name: ci
-on: 
-  workflow_call:
-    inputs:
-      tag:
-        type: string
-        required: true
-
+on: workflow_call
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
       - name: 'Obtener versión'
         run: echo "version=$(jq -r '.version' ./package.json)" >> $GITHUB_ENV
 
-        #- name: Obtener tag
-        #id: tag
-        #uses: ./.github/actions/getTag
-        #with:
-        #user: ${{ vars.DOCKER_USERNAME }}
+      - name: Obtener tag
+        id: tag
+        uses: ./.github/actions/getTag
+        with:
+          user: ${{ vars.DOCKER_USERNAME }}
 
       - name: login
         uses: docker/login-action@v3
@@ -31,6 +27,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ github.event.inputs.tag }}
+          tags: ${{ steps.tag.outputs.tag }}
 
 
