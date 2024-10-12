@@ -27,7 +27,7 @@ jobs:
       - run: echo npm run test
       - run: echo realizando tests...
       - run: sleep 2
-      - run: echo EXITO
+      - run:  EXITO
       - id: salida
         run: echo "resultado=exito" >> $GITHUB_OUTPUT
 
