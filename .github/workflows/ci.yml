@@ -1,0 +1,60 @@
+name: ci
+on:
+  workflow_call:
+    inputs:
+      entorno:
+        required: true
+        type: string
+    outputs:
+      tag:
+        value: ${{ jobs.build.outputs.tag }}
+
+jobs:
+  test: 
+    if: ${{ inputs.entorno == 'production' }}
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.entorno }}
+    container:
+      image: node:latest
+    steps:
+      - run: echo ${{ vars.prueba }}
+      - run: echo "SIMULACIÓN DE TESTS"
+      - uses: actions/checkout@v4
+      - run: echo npm install
+      - run: echo instalando...
+      - run: sleep 2
+      - run: echo npm run test
+      - run: echo realizando tests...
+      - run: sleep 2
+      - run: EXITO
+
+  build:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.entorno }}
+    if: ${{ always() }}
+    needs: test
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Obtener tag
+        id: tag
+        uses: ./.github/actions/getTag
+        with:
+          user: ${{ vars.DOCKER_USERNAME }}
+
+      - name: login
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.tag.outputs.tag }}
+
+

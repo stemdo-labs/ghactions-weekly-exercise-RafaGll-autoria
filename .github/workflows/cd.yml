@@ -1,0 +1,30 @@
+name: cd
+on: 
+  workflow_call:
+    inputs: 
+      environment:
+        required: true
+        type: string
+      tag:
+        required: true
+        type: string
+
+
+jobs:
+  ejecutar:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment
+    steps:
+      - name: bajar imagen
+        run: docker pull rafagll/${{ inputs.tag }}
+      - name: ejecutar contenedor
+        run: docker run -d -it -p 8080:8080 --name angular-app ${{ inputs.tag }}
+      - run: curl localhost:8080 > curl.txt
+
+      - name: Comprobar curl
+        run: cat curl.txt
+
+
+      - name: docker stop 
+        run: docker stop angular-app
+
