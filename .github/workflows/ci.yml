@@ -11,10 +11,9 @@ on:
 
 jobs:
   test: 
-    if: true
-  #if: ${{ inputs.entorno == 'production' }}
+    if: ${{ inputs.entorno == 'production' }}
     runs-on: ubuntu-latest
-    #environment: produccion
+    environment: ${{ inputs.entorno }}
     container:
       image: node:latest
     steps:
@@ -28,6 +27,7 @@ jobs:
       - run: echo realizando tests...
       - run: sleep 2
       - run: EXITO
+
   build:
     runs-on: ubuntu-latest
     environment: ${{ inputs.entorno }}

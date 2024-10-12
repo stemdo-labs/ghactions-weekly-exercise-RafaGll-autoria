@@ -2,7 +2,7 @@ name: cd
 on: 
   workflow_call:
     inputs: 
-      entorno:
+      environment:
         required: true
         type: string
       tag:
@@ -13,16 +13,16 @@ on:
 jobs:
   ejecutar:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment
     steps:
       - name: bajar imagen
-        run: docker pull rafagll/sample-angular-app:0.2.0
+        run: docker pull rafagll/${{ inputs.tag }}
       - name: ejecutar contenedor
         run: docker run -d -it -p 8080:8080 --name angular-app ${{ inputs.tag }}
-      - name: docker ps
-        run: docker ps
       - run: curl localhost:8080 > curl.txt
 
-      - run: cat curl.txt
+      - name: Comprobar curl
+        run: cat curl.txt
 
 
       - name: docker stop 
