@@ -14,10 +14,11 @@ jobs:
     if: ${{ inputs.entorno == 'production' }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.entorno }}
+    outputs:
+      resultado: ${{ steps.salida.outputs.resultado }}
     container:
       image: node:latest
     steps:
-      - run: echo ${{ vars.prueba }}
       - run: echo "SIMULACIÓN DE TESTS"
       - uses: actions/checkout@v4
       - run: echo npm install
@@ -27,12 +28,14 @@ jobs:
       - run: echo realizando tests...
       - run: sleep 2
       - run: echo EXITO
+      - id: salida
+        run: echo "resultado=exito" >> $GITHUB_OUTPUT
 
   build:
     runs-on: ubuntu-latest
     environment: ${{ inputs.entorno }}
-    if: ${{ always() }}
     needs: test
+    if: ${{ always() && needs.test.outputs.resultado == 'exito' }}
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
     steps:
