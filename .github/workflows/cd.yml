@@ -13,7 +13,7 @@ on:
 jobs:
   ejecutar:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment
+    environment: ${{ inputs.environment }}
     steps:
       - name: bajar imagen
         run: docker pull rafagll/${{ inputs.tag }}
