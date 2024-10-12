@@ -16,7 +16,7 @@ jobs:
     environment: ${{ inputs.entorno }}
     steps:
       - name: bajar imagen
-        run: docker pull rafagll/${{ inputs.tag }}
+        run: docker pull ${{ inputs.tag }}
       - name: ejecutar contenedor
         run: docker run -d -it -p 8080:8080 --name angular-app ${{ inputs.tag }}
       - run: curl localhost:8080 > curl.txt
