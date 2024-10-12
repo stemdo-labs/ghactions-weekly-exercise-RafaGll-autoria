@@ -14,8 +14,6 @@ jobs:
     if: ${{ inputs.entorno == 'production' }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.entorno }}
-    outputs:
-      resultado: ${{ steps.salida.outputs.resultado }}
     container:
       image: node:latest
     steps:
@@ -28,14 +26,12 @@ jobs:
       - run: echo realizando tests...
       - run: sleep 2
       - run: echo EXITO
-      - id: salida
-        run: echo "resultado=exito" >> $GITHUB_OUTPUT
 
   build:
     runs-on: ubuntu-latest
     environment: ${{ inputs.entorno }}
     needs: test
-    if: ${{ always() && needs.test.outputs.resultado == 'exito' }}
+    if: ${{ always() && !failure()}}
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
     steps:
