@@ -43,13 +43,13 @@ jobs:
         with:
           user: ${{ vars.DOCKER_USERNAME }}
 
-      - name: login
+      - name: login en docker
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: build and push
+      - name: Construir y subir a docker hub
         uses: docker/build-push-action@v6
         with:
           context: .
