@@ -1,6 +1,0 @@
-name: 'hola'
-runs:
-  using: "composite"
-  steps:
-    - run: echo ${{ env.USERNAME }}
-      shell: bash
