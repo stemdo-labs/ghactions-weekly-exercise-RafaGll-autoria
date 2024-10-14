@@ -4,6 +4,9 @@ inputs:
   user:
     description: 'nombre de usuario en docker'
     required: true
+  etiqueta:
+    description: 'añadir a la etiqueta snapshot o no'
+    required: true
 outputs:
   tag:
     description: 'tag final de la imagen'
@@ -19,5 +22,5 @@ runs:
       shell: bash
     - name: Crear el tag
       id: generar-tag
-      run: echo "tag=${{ inputs.user }}/${{ env.image }}:${{ env.version }}" >> $GITHUB_OUTPUT
+      run: echo "tag=${{ inputs.user }}/${{ env.image }}:${{ env.version }}${{ inputs.etiqueta }}" >> $GITHUB_OUTPUT
       shell: bash
