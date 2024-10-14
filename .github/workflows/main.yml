@@ -29,7 +29,7 @@ jobs:
     uses: ./.github/workflows/ci.yml
     with:
       entorno: ${{ needs.entorno.outputs.entorno }}
-      etiqueta: ${{ needs.entorno.outputs.etiqueta
+      etiqueta: ${{ needs.entorno.outputs.etiqueta }}
     secrets: inherit
   cd:
     needs: ci
