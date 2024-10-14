@@ -11,19 +11,25 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       entorno: ${{ steps.obtener.outputs.entorno }}
+      etiqueta: ${{ steps.obtener.outputs.etiqueta }}
     steps:
-      - id: obtener
+      - name: obtener entorno
+        id: obtener
         run: |
           if [ ${{ github.ref_name }} == 'main' ]; then
             echo "entorno=production" >> $GITHUB_OUTPUT
+            echo "etiqueta=''" >> $GITHUB_OUTPUT
           else
             echo "entorno=UAT" >> $GITHUB_OUTPUT
+            echo "etiqueta='-snapshot'" >> $GITHUB_OUTPUT
           fi
+
   ci:
     needs: entorno
     uses: ./.github/workflows/ci.yml
     with:
       entorno: ${{ needs.entorno.outputs.entorno }}
+      etiqueta: ${{ needs.entorno.outputs.etiqueta
     secrets: inherit
   cd:
     needs: ci
