@@ -21,8 +21,11 @@ jobs:
             echo "etiqueta=''" >> $GITHUB_OUTPUT
           else
             echo "entorno=UAT" >> $GITHUB_OUTPUT
-            echo "etiqueta='-snapshot'" >> $GITHUB_OUTPUT
+            echo "etiqueta=-snapshot" >> $GITHUB_OUTPUT
           fi
+      - run: |
+          echo ${{ steps.obtener.outputs.entorno }}
+          echo ${{ steps.obtener.outputs.entorno }}
 
   ci:
     needs: entorno
