@@ -25,7 +25,7 @@ jobs:
           fi
       - run: |
           echo ${{ steps.obtener.outputs.entorno }}
-          echo ${{ steps.obtener.outputs.entorno }}
+          echo ${{ steps.obtener.outputs.etiqueta }}
 
   ci:
     needs: entorno
