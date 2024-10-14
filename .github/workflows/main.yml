@@ -18,7 +18,7 @@ jobs:
         run: |
           if [ ${{ github.ref_name }} == 'main' ]; then
             echo "entorno=production" >> $GITHUB_OUTPUT
-            echo "etiqueta=''" >> $GITHUB_OUTPUT
+            echo "etiqueta=" >> $GITHUB_OUTPUT
           else
             echo "entorno=UAT" >> $GITHUB_OUTPUT
             echo "etiqueta=-snapshot" >> $GITHUB_OUTPUT
